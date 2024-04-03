@@ -20,6 +20,8 @@ struct HashMap {
 
     // Helper functions
 
+    int determine_owner(uint64_t slot);
+
     // Write and read to a logical data slot in the table.
     void write_slot(uint64_t slot, const kmer_pair& kmer);
     kmer_pair read_slot(uint64_t slot);
@@ -29,6 +31,10 @@ struct HashMap {
     bool slot_used(uint64_t slot);
 };
 
+int HashMap::determine_owner(uint64_t slot) {
+    return slot % upcxx::rank_n();
+}
+
 HashMap::HashMap(size_t size) {
     my_size = size;
     data.resize(size);
@@ -37,33 +43,57 @@ HashMap::HashMap(size_t size) {
 
 bool HashMap::insert(const kmer_pair& kmer) {
     uint64_t hash = kmer.hash();
-    uint64_t probe = 0;
-    bool success = false;
-    do {
-        uint64_t slot = (hash + probe++) % size();
-        success = request_slot(slot);
-        if (success) {
-            write_slot(slot, kmer);
+    for (uint64_t probe = 0; probe < size(); ++probe) {
+        uint64_t slot = (hash + probe) % size();
+        // Determine which process owns the slot
+        int owner = determine_owner(slot);
+
+        if (owner == upcxx::rank_me()) {
+            // Local insertion
+            if (!slot_used(slot)) {
+                write_slot(slot, kmer);
+                return true;
+            }
+        } else {
+            // Remote insertion
+            bool success = upcxx::rpc(owner, [this, slot, &kmer] {
+                return request_slot(slot) && write_slot(slot, kmer);
+            }).wait();
+            if (success) {
+                return true;
+            }
         }
-    } while (!success && probe < size());
-    return success;
+    }
+    return false;
 }
 
 bool HashMap::find(const pkmer_t& key_kmer, kmer_pair& val_kmer) {
     uint64_t hash = key_kmer.hash();
-    uint64_t probe = 0;
-    bool success = false;
-    do {
-        uint64_t slot = (hash + probe++) % size();
-        if (slot_used(slot)) {
-            val_kmer = read_slot(slot);
-            if (val_kmer.kmer == key_kmer) {
-                success = true;
+    for (uint64_t probe = 0; probe < size(); ++probe) {
+        uint64_t slot = (hash + probe) % size();
+        int owner = determine_owner(slot);
+
+        if (owner == upcxx::rank_me()) {
+            // Local search
+            if (slot_used(slot) && data[slot].kmer == key_kmer) {
+                val_kmer = read_slot(slot);
+                return true;
+            }
+        } else {
+            // Remote search
+            kmer_pair found_kmer = upcxx::rpc(owner, [this, slot] {
+                return read_slot(slot);
+            }).wait();
+
+            if (found_kmer.kmer == key_kmer) {
+                val_kmer = found_kmer;
+                return true;
             }
         }
-    } while (!success && probe < size());
-    return success;
+    }
+    return false;
 }
+
 
 bool HashMap::slot_used(uint64_t slot) { return used[slot] != 0; }
 
