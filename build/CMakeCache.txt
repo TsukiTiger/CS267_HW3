@@ -192,11 +192,29 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//No help, variable specified on the command line.
-GROUP_NAME:UNINITIALIZED=35
+//Enable to build RPM source packages
+CPACK_SOURCE_RPM:BOOL=OFF
+
+//Enable to build TBZ2 source packages
+CPACK_SOURCE_TBZ2:BOOL=ON
+
+//Enable to build TGZ source packages
+CPACK_SOURCE_TGZ:BOOL=ON
+
+//Enable to build TXZ source packages
+CPACK_SOURCE_TXZ:BOOL=ON
+
+//Enable to build TZ source packages
+CPACK_SOURCE_TZ:BOOL=ON
+
+//Enable to build ZIP source packages
+CPACK_SOURCE_ZIP:BOOL=OFF
+
+//Your group name as it appears on bCourses (no spaces)
+GROUP_NAME:STRING=35
 
 //The directory containing a CMake configuration file for UPCXX.
-UPCXX_DIR:PATH=UPCXX_DIR-NOTFOUND
+UPCXX_DIR:PATH=/global/common/software/m2878/perlmutter/upcxx/generic/share/cmake/UPCXX
 
 //Path to a program.
 UPCXX_META_EXECUTABLE:FILEPATH=/global/common/software/m2878/perlmutter/upcxx/generic/bin/upcxx-meta
@@ -351,6 +369,18 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_RPM
+CPACK_SOURCE_RPM-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_TBZ2
+CPACK_SOURCE_TBZ2-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_TGZ
+CPACK_SOURCE_TGZ-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_TXZ
+CPACK_SOURCE_TXZ-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_TZ
+CPACK_SOURCE_TZ-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CPACK_SOURCE_ZIP
+CPACK_SOURCE_ZIP-ADVANCED:INTERNAL=1
 //Details about finding UPCXX
 FIND_PACKAGE_MESSAGE_DETAILS_UPCXX:INTERNAL=[/global/common/software/m2878/perlmutter/upcxx/generic/bin/upcxx-meta][-L/global/common/software/m2878/perlmutter/upcxx/2023.9.0/gnu/PrgEnv-gnu-8.5.0-12.3/upcxx.opt.gasnet_seq.ofi/lib -lupcxx -L/global/common/software/m2878/perlmutter/upcxx/2023.9.0/gnu/PrgEnv-gnu-8.5.0-12.3/gasnet.opt/lib -lgasnet-ofi-seq -L/opt/cray/libfabric/1.15.2.0/lib64 -lfabric   -L/opt/cray/pe/pmi/default/lib -lpmi2 -lhwloc      -lhugetlbfs -L/usr/lib64/gcc/x86_64-suse-linux/12 -lgcc -lm][/global/common/software/m2878/perlmutter/upcxx/2023.9.0/gnu/PrgEnv-gnu-8.5.0-12.3/include;/global/common/software/m2878/perlmutter/upcxx/2023.9.0/gnu/PrgEnv-gnu-8.5.0-12.3/upcxx.opt.gasnet_seq.ofi/gen_include;/global/common/software/m2878/perlmutter/upcxx/2023.9.0/gnu/PrgEnv-gnu-8.5.0-12.3/gasnet.opt/include;/global/common/software/m2878/perlmutter/upcxx/2023.9.0/gnu/PrgEnv-gnu-8.5.0-12.3/gasnet.opt/include/ofi-conduit][UPCXXI_ASSERT_ENABLED=0;UPCXXI_BACKEND=1;UPCXXI_BACKEND_GASNET_SEQ=1;_GNU_SOURCE=1;GASNET_SEQ][TRUE][c ][v2023.9.0()]
 //ADVANCED property for variable: UPCXX_META_EXECUTABLE

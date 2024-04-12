@@ -1,4 +1,10 @@
-/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/kmer_hash_19.dir
-/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/kmer_hash_51.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/install/strip.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/install/local.dir
 /global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/edit_cache.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/package_source.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/install.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/list_install_components.dir
 /global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/rebuild_cache.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/package.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/kmer_hash_51.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/kmer_hash_19.dir
