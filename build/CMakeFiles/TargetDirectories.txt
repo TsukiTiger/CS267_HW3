@@ -1,0 +1,4 @@
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/kmer_hash_19.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/kmer_hash_51.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/edit_cache.dir
+/global/homes/c/chongyef/CS267_HW3/build/CMakeFiles/rebuild_cache.dir
